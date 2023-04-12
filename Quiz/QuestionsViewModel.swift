@@ -20,6 +20,7 @@ class QuestionsViewModel : ObservableObject {
                     ]
     
     @Published var currentQuestion : Question
+    var currentAnswers : [String] = []
     private var currentIndex = 0
     
     init() {
@@ -28,11 +29,11 @@ class QuestionsViewModel : ObservableObject {
     }
     
     
-    func currentAnswers() -> [String] {
+    private func createAnswers() {
         var answers = currentQuestion.incorrectAnswers
         answers.append(currentQuestion.correctAnswer)
         answers.shuffle()
-        return answers
+        currentAnswers = answers
     }
     
     func nextQuestion() {
@@ -44,5 +45,6 @@ class QuestionsViewModel : ObservableObject {
             currentIndex = 0
         }
         currentQuestion = questions[currentIndex]
+        createAnswers()
     }
 }

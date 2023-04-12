@@ -22,7 +22,7 @@ struct ContentView: View {
                 Spacer()
             Text(questionsVM.currentQuestion.question)
                 Spacer()
-            ForEach( questionsVM.currentAnswers(), id: \.self) {answer in
+            ForEach( questionsVM.currentAnswers, id: \.self) {answer in
                 Button(action: {
                     handleAnswer(answer: answer)
                 }) {
