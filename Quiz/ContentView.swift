@@ -22,27 +22,14 @@ struct ContentView: View {
                 Spacer()
             Text(questionsVM.currentQuestion.question)
                 Spacer()
+            ForEach( questionsVM.currentAnswers(), id: \.self) {answer in
                 Button(action: {
-                    handleAnswer(answer: questionsVM.currentQuestion.correctAnswer)
+                    handleAnswer(answer: answer)
                 }) {
-                    Text(questionsVM.currentQuestion.correctAnswer)
+                    Text(answer)
                 }
-                Button(action: {
-                    handleAnswer(answer: questionsVM.currentQuestion.incorrectAnswers[0])
-                }) {
-                    Text(questionsVM.currentQuestion.incorrectAnswers[0])
-                }
-                Button(action: {
-                    handleAnswer(answer: questionsVM.currentQuestion.incorrectAnswers[1])
-                }) {
-                    Text(questionsVM.currentQuestion.incorrectAnswers[1])
-                }
-                Button(action: {
-                    handleAnswer(answer: questionsVM.currentQuestion.incorrectAnswers[2])
-                }) {
-                    Text(questionsVM.currentQuestion.incorrectAnswers[2])
-                }
-                Spacer()
+            }
+            Spacer()
             
         }
         .onAppear {

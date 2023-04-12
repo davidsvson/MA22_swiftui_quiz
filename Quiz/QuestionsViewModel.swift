@@ -20,18 +20,29 @@ class QuestionsViewModel : ObservableObject {
                     ]
     
     @Published var currentQuestion : Question
+    private var currentIndex = 0
     
     init() {
-        let rand = Int.random(in: 0..<questions.count)
-        currentQuestion = questions[rand]
+        questions.shuffle()
+        currentQuestion = questions[currentIndex]
     }
     
+    
+    func currentAnswers() -> [String] {
+        var answers = currentQuestion.incorrectAnswers
+        answers.append(currentQuestion.correctAnswer)
+        answers.shuffle()
+        return answers
+    }
     
     func nextQuestion() {
-        let rand = Int.random(in: 0..<questions.count)
-        currentQuestion = questions[rand]
+        print(currentIndex)
+        if currentIndex < questions.count - 1 {
+            currentIndex += 1
+        } else {
+            questions.shuffle()
+            currentIndex = 0
+        }
+        currentQuestion = questions[currentIndex]
     }
-    
-    
-    
 }
